@@ -30,7 +30,7 @@ apt-get install -y ssl-cert \
     ca-certificates \
     python3 \
     python3-pip \
-    python3-crypto \
+    python3-cryptography \
     python3-setuptools \
     python3-pykka  \
     python3-gst-1.0 \
