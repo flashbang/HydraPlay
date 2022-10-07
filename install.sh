@@ -102,7 +102,7 @@ echo ""
 echo "============================================"
 echo "${clear}"
 
-cd  tmp
+cd  /tmp
 mkdir source
 cd source
 
