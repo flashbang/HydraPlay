@@ -1,7 +1,8 @@
 #!/bin/bash
 
-SNAPCAST_ARCH=$(dpkg --print-architecture)
-SNAPCASTVERSION=0.26.0
+#SNAPCAST_ARCH=$(dpkg --print-architecture)
+SNAPCAST_ARCH=armhf
+SNAPCASTVERSION=0.27.0
 clear
 
 # Set up the shell variables for colors
