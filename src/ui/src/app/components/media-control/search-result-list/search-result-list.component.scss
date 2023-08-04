@@ -1,9 +1,25 @@
-.search-list{
-  height:320px;
-  overflow: auto;
-  margin-top: 30px;
-}
+@import "mixins";
 
+.search-list{
+
+  overflow: auto;
+  margin-top: 1em;
+  @include xs-phone-portrait {
+    height: 44vh;
+  }
+
+  @include xm-phone-portrait{
+    height: 47vh;
+  }
+
+  @include xl-phone-portrait{
+    height: 52vh;
+  }
+
+  @include desktop{
+    height: 44vh;
+  }
+}
 
 .disable-text-select {
   -webkit-user-select: none;

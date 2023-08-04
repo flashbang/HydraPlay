@@ -1,7 +1,9 @@
 {
 	"hydraplay": {
-	    "port": 8080,
-		"source_type": "tcp"
+		"port": 8080,
+		"source_type": "tcp",
+		"use_ws_proxy": "false",
+		"cookie_secret": "_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__"
 	},
 	"mopidy":{
 		"mpd_base_port": 6600,
@@ -36,15 +38,16 @@
 				"identity": "<your_id_here_see_extension_docs>"
 			},
 			"local": {
-				"enabled": true,
-				"media_dir": "/media"
+				"enabled": false,
+				"media_dir": "/media/"
 			}
 		}
 	},
 	"snapcast_server":{
 		"server_port": 1704,
 		"remote_port": 1705,
-		"additional_streams":[],
+		"additional_streams":[
+		],
 		"config_path": "/tmp/",
 		"codec": "flac"
 	}

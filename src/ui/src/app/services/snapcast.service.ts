@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { webSocket,  WebSocketSubject } from "rxjs/webSocket";
-import {EMPTY, Subject, BehaviorSubject, Observable, timer} from 'rxjs';
-import { catchError, tap, switchAll, retryWhen, delayWhen, } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import {EMPTY, Subject, BehaviorSubject, Observable, timer, lastValueFrom} from 'rxjs';
+import { catchError, tap, switchAll, retryWhen, delayWhen, map} from 'rxjs/operators';
 import {NotificationService} from "./notification.service";
 
 export interface ISnapCastEvent {
@@ -24,6 +25,8 @@ export class SnapcastService {
   private snapcastHost: string;
   private reconnectTimeout: any;
 
+  private wsProtocol: string;
+
   private groups: Array<any> = [];
   private streams: Array<any> = [];
   private players: any = {};
@@ -33,11 +36,17 @@ export class SnapcastService {
   public observableClients$: BehaviorSubject<Array<object>>
   public snapCastIsConnected: boolean = false;
 
-  constructor( public notificationService: NotificationService) {
+  constructor(private http: HttpClient, public notificationService: NotificationService) {
     const url = new URL(window.location.href);
 
     this.snapcastPort = 1780;
     this.snapcastHost = url.hostname;
+
+    this.wsProtocol = 'ws://';
+    if (window.location.protocol === 'https:') {
+        this.wsProtocol = 'wss://';
+    }
+
     this.observableClients$ = new BehaviorSubject<Array<object>>(this.clients);
     this.observableGroups$ = new BehaviorSubject<Array<object>>(this.groups);
 
@@ -52,25 +61,46 @@ export class SnapcastService {
     delete this.players[playerId];
   }
 
-  public connect(cfg: { reconnect: boolean } = { reconnect: false }):void {
-    console.log("Connecting to Snapcast Server ... ")
+  public getHydraplaySettings(){
+
+    const url = new URL(window.location.href);
+    const hydraplayPort = url.port;
+    const hydraplayHost = url.hostname;
+    const hdraplayProtocol = url.protocol;
+
+    return  this.http.get<any>(hdraplayProtocol + "//" + hydraplayHost + ":" + hydraplayPort + "/api/settings").pipe(map(response=>response));
+  }
+
+  public async connect(cfg: { reconnect: boolean } = { reconnect: true }) {
 
     if (!this.socket$ || this.socket$.closed) {
-    this.messages$.subscribe(message => this.handleIncomingSnapcastEvent(message))
-    this.socket$ = this.getNewWebSocket();
-    const messages = this.socket$.pipe(cfg.reconnect ? this.reconnect : o => o,
-       tap({
-         error: error => console.log(error),
-       }), catchError(_ => EMPTY))
-    this.messagesSubject$.next(messages);
+      console.log("Connecting to Snapcast Server ... ")
+
+      this.messages$.subscribe(message => this.handleIncomingSnapcastEvent(message))
+
+      let $hydra_settings = this.getHydraplaySettings();
+      let hydra_settings = await lastValueFrom($hydra_settings);
+
+      this.socket$ = this.getNewWebSocket(hydra_settings);
+      const messages = this.socket$.pipe(cfg.reconnect ? this.reconnect : o => o,
+         tap(error => {
+             console.log(error)
+         }), catchError(_ => EMPTY))
+      this.messagesSubject$.next(messages);
 
     }
     this.getSnapCastServerState();
   }
 
-  private getNewWebSocket() {
+  private getNewWebSocket(hydra_settings:any) {
+    let wsUrl = `${this.wsProtocol}${this.snapcastHost}:${this.snapcastPort}/jsonrpc`;
+
+    if (hydra_settings['hydraplay']['use_ws_proxy']) {
+       wsUrl = `${this.wsProtocol}${this.snapcastHost}/socket/control/jsonrpc`;
+    }
+
     return webSocket({
-      url: `ws://${this.snapcastHost}:${this.snapcastPort}/jsonrpc`,
+      url: wsUrl,
       closeObserver: {
        next: () => {
          console.log('[DataService]: connection closed');
@@ -103,7 +133,6 @@ export class SnapcastService {
             break;
           case "Client.OnDisconnect":
             this.notificationService.info(`${message.params.client.host.name} connection lost.`)
-            this.reconnectTimeout = setInterval(this.connect, 1000);
             this.getSnapCastServerState();
             break;
           case "Client.OnConnect":

@@ -1,23 +1,17 @@
 name: build docker image
 
 on:
-  push:
-    tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
-
+  repository_dispatch:
+    types: [build-docker-image]
 jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Get latest tag
-        id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF:10}
-
       - name: Clone repository
         uses: actions/checkout@v2
         with:
-          ref: ${{ steps.vars.outputs.tag }}
+          ref: ${{ github.event.client_payload.tag }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -41,4 +35,4 @@ jobs:
           platforms: linux/amd64,linux/armhf
           file: docker/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/hydraplay:${{ steps.vars.outputs.tag }},${{ secrets.DOCKERHUB_USERNAME }}/hydraplay:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/hydraplay:${{ github.event.client_payload.tag }},${{ secrets.DOCKERHUB_USERNAME }}/hydraplay:latest

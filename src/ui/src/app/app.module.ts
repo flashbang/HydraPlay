@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './components/player/player.component';
 import { NoopAnimationsModule} from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
+
 
 import {MatSliderModule} from "@angular/material/slider";
 import {MatButtonModule} from "@angular/material/button";
@@ -39,6 +39,9 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import { MatSelectModule } from '@angular/material/select';
+import { SwiperModule } from 'swiper/angular';
+import { LayoutModule } from '@angular/cdk/layout';
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -64,7 +67,6 @@ import { MatSelectModule } from '@angular/material/select';
     HttpClientModule,
     AppRoutingModule,
     NoopAnimationsModule,
-    FlexLayoutModule,
     HttpClientModule,
     MatButtonModule,
     MatCardModule,
@@ -82,7 +84,10 @@ import { MatSelectModule } from '@angular/material/select';
     MatCheckboxModule,
     DragDropModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    SwiperModule,
+    LayoutModule,
+    MatToolbarModule
   ],
   exports: [],
   providers: [
