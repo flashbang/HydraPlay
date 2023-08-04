@@ -4,7 +4,7 @@ services:
     # use platform linux/amd64 if you are running on apple siclicon ( ! requires rosetta ! )
     #platform: linux/amd64
     privileged: true
-    image: mariolukas/hydraplay:latest
+    image: 24c3be37d172
     container_name: hydraplay
     ports:
       - 8080:8080
