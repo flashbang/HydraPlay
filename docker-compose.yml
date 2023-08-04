@@ -11,7 +11,10 @@ services:
       - 1780:1780
       - 1704:1704
       - 1705:1705
+      - 6600-6679:6600-6679
       - 6680-6690:6680-6690
     volumes:
        # mount src folder for development
-       - ./hydra.private.json:/tmp/hydra.config.json
+       - ../../hydraplay/hydra.private.json:/tmp/hydra.config.json
+       - ../../hydraplay/snapserver.conf:/etc/snapserver.conf
+       - ../../hydraplay/tmp/:/tmp/
