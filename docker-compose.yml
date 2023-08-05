@@ -2,7 +2,7 @@ version: "3.5"
 services:
   hydraplay:
     # use platform linux/amd64 if you are running on apple siclicon ( ! requires rosetta ! )
-    #platform: linux/amd64
+    platform: amd64
     privileged: true
     image: ece9288611d0
     container_name: hydraplay
