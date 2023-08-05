@@ -6,6 +6,12 @@ RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y ssl-cert \
     wget \
     curl \
+ && mkdir -p /etc/apt/keyrings \
+ && wget -q -O /etc/apt/keyrings/mopidy-archive-keyring.gpg \
+ && https://apt.mopidy.com/mopidy.gpg
+ && wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/bullseye.list \
+ && apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     gcc  \
     gnupg \
     git \
@@ -22,17 +28,11 @@ RUN apt-get update && \
     gstreamer1.0-plugins-ugly \
     gstreamer1.0-tools \
     libgirepository1.0-dev \
- && mkdir -p /etc/apt/keyrings \
- && wget -q -O /etc/apt/keyrings/mopidy-archive-keyring.gpg \
- && https://apt.mopidy.com/mopidy.gpg
- && wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/bullseye.list \
- && apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y \
-        mopidy \
-        mopidy-spotify \
-        mopidy-tunein \
-        mopidy-soundcloud \
-        mopidy-mpd\
+    mopidy \
+    mopidy-spotify \
+    mopidy-tunein \
+    mopidy-soundcloud \
+    mopidy-mpd\
  && python3 -m pip install setuptools \
  && python3 -m pip install https://github.com/natumbri/mopidy-youtube/archive/develop.zip \
  && python3 -m pip install --upgrade youtube-dl \
