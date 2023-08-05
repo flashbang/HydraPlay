@@ -46,27 +46,27 @@ RUN apt-get update && \
 # Install mopidy-spotify-gstspotify (Hack, not released yet!)
 # (https://github.com/kingosticks/mopidy-spotify/tree/gstspotifysrc-hack)
 
-RUN export GST_ARCH=$TARGETARCH \
-  && if [ "$TARGETARCH" = "arm" ]; then GST_ARCH=${TARGETARCH}hf; fi \
-  && curl -sLO https://github.com/mariolukas/gst-plugins-rs-builder/releases/download/2023-01-26/gst-plugin-spotify_0.9.8_${GST_ARCH}.deb \
-  && dpkg -i gst-plugin-spotify_0.9.8_${GST_ARCH}.deb \
-  && git clone --depth 1 -b gstspotifysrc-hack https://github.com/kingosticks/mopidy-spotify.git mopidy-spotify \
-  && cd mopidy-spotify \
-  && python3 setup.py install \
-  && cd .. \
-  && rm -rf mopidy-spotify
+#RUN export GST_ARCH=$TARGETARCH \
+#  && if [ "$TARGETARCH" = "arm" ]; then GST_ARCH=${TARGETARCH}hf; fi \
+#  && curl -sLO https://github.com/mariolukas/gst-plugins-rs-builder/releases/download/2023-01-26/gst-plugin-spotify_0.9.8_${GST_ARCH}.deb \
+#  && dpkg -i gst-plugin-spotify_0.9.8_${GST_ARCH}.deb \
+#  && git clone --depth 1 -b gstspotifysrc-hack https://github.com/kingosticks/mopidy-spotify.git mopidy-spotify \
+#  && cd mopidy-spotify \
+#  && python3 setup.py install \
+#  && cd .. \
+#  && rm -rf mopidy-spotify
 
 #======================================= HYDRAPLAY INSTALLATION ==================================================#
 
-#RUN export LATEST_RELEASE_VER=$(curl -sL https://api.github.com/repos/mariolukas/HydraPlay/releases/latest | jq -r ".tag_name") \
-# && export LATEST_RELEASE_ZIP=$(curl -sL https://api.github.com/repos/mariolukas/HydraPlay/releases/latest | jq -r ".assets[].browser_download_url") \
-# && wget ${LATEST_RELEASE_ZIP} \
-# && mkdir -p /tmp/hydraplay \
-# && mkdir -p /app \
-# && unzip hydraplay-${LATEST_RELEASE_VER}.zip "src/*" -d /tmp/hydraplay/ \
-# && cp -R /tmp/hydraplay/src/* /app/. \
-# && rm hydraplay-${LATEST_RELEASE_VER}.zip \
-# && rm -R /tmp/hydraplay
+RUN export LATEST_RELEASE_VER=$(curl -sL https://api.github.com/repos/mariolukas/HydraPlay/releases/latest | jq -r ".tag_name") \
+ && export LATEST_RELEASE_ZIP=$(curl -sL https://api.github.com/repos/mariolukas/HydraPlay/releases/latest | jq -r ".assets[].browser_download_url") \
+ && wget ${LATEST_RELEASE_ZIP} \
+ && mkdir -p /tmp/hydraplay \
+ && mkdir -p /app \
+ && unzip hydraplay-${LATEST_RELEASE_VER}.zip "src/*" -d /tmp/hydraplay/ \
+ && cp -R /tmp/hydraplay/src/* /app/. \
+ && rm hydraplay-${LATEST_RELEASE_VER}.zip \
+ && rm -R /tmp/hydraplay
 
 #======================================= SNAPCAST INSTALLATION ===================================================#
 
