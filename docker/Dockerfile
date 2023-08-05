@@ -11,6 +11,7 @@ RUN apt-get update && \
  && wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/bullseye.list \
  && apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    sudo \
     gcc  \
     gnupg \
     git \
