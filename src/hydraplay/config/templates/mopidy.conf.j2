@@ -38,6 +38,13 @@ zeroconf = Mopidy MPD server {{ stream_id }} on $hostname
 command_blacklist =
 default_playlist_scheme = m3u
 
+[mopiqtt]
+host = <mqtt broker address>
+port = 1883
+topic = mopidy{{ stream_id }}
+username = admin
+password = qZu1fIBvRBMxzRwvHfCr
+
 [http]
 enabled = true
 hostname = ::
