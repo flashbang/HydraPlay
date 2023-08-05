@@ -4,7 +4,7 @@ services:
     # use platform linux/amd64 if you are running on apple siclicon ( ! requires rosetta ! )
     #platform: linux/amd64
     privileged: true
-    image: 24c3be37d172
+    image: ece9288611d0
     container_name: hydraplay
     ports:
       - 8080:8080
@@ -15,6 +15,5 @@ services:
       - 6680-6690:6680-6690
     volumes:
        # mount src folder for development
-       - ../../hydraplay/hydra.private.json:/tmp/hydra.config.json
-       - ../../hydraplay/snapserver.conf:/etc/snapserver.conf
-       - ../../hydraplay/tmp/:/tmp/
+       - ./hydra.private.json:/tmp/hydra.config.json
+
