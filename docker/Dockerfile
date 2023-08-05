@@ -58,15 +58,15 @@ RUN export GST_ARCH=$TARGETARCH \
 
 #======================================= HYDRAPLAY INSTALLATION ==================================================#
 
-RUN export LATEST_RELEASE_VER=$(curl -sL https://api.github.com/repos/mariolukas/HydraPlay/releases/latest | jq -r ".tag_name") \
- && export LATEST_RELEASE_ZIP=$(curl -sL https://api.github.com/repos/mariolukas/HydraPlay/releases/latest | jq -r ".assets[].browser_download_url") \
- && wget ${LATEST_RELEASE_ZIP} \
- && mkdir -p /tmp/hydraplay \
- && mkdir -p /app \
- && unzip hydraplay-${LATEST_RELEASE_VER}.zip "src/*" -d /tmp/hydraplay/ \
- && cp -R /tmp/hydraplay/src/* /app/. \
- && rm hydraplay-${LATEST_RELEASE_VER}.zip \
- && rm -R /tmp/hydraplay
+#RUN export LATEST_RELEASE_VER=$(curl -sL https://api.github.com/repos/mariolukas/HydraPlay/releases/latest | jq -r ".tag_name") \
+# && export LATEST_RELEASE_ZIP=$(curl -sL https://api.github.com/repos/mariolukas/HydraPlay/releases/latest | jq -r ".assets[].browser_download_url") \
+# && wget ${LATEST_RELEASE_ZIP} \
+# && mkdir -p /tmp/hydraplay \
+# && mkdir -p /app \
+# && unzip hydraplay-${LATEST_RELEASE_VER}.zip "src/*" -d /tmp/hydraplay/ \
+# && cp -R /tmp/hydraplay/src/* /app/. \
+# && rm hydraplay-${LATEST_RELEASE_VER}.zip \
+# && rm -R /tmp/hydraplay
 
 #======================================= SNAPCAST INSTALLATION ===================================================#
 
