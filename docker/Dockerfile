@@ -40,7 +40,7 @@ RUN apt-get update && \
  && python3 -m pip install Mopidy-Bandcamp \
  && python3 -m pip install Mopidy-Local \
  && python3 -m pip install Mopidy-MPD \
- && python3 -m pip install Mopiqtt
+ && python3 -m pip install Mopiqtt \
  && python3 -m pip install jinja2 tornado \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
 
