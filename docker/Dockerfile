@@ -36,8 +36,9 @@ RUN apt-get update && \
     mopidy-soundcloud \
     mopidy-mpd\
  && python3 -m pip install setuptools \
- && python3 -m pip install https://github.com/natumbri/mopidy-youtube/archive/develop.zip \
- && python3 -m pip install --upgrade youtube-dl \
+# && python3 -m pip install https://github.com/natumbri/mopidy-youtube/archive/develop.zip \
+# && python3 -m pip install --upgrade youtube-dl \
+ && python3 -m pip install -U yt-dlp \
  && python3 -m pip install Mopidy-Bandcamp \
  && python3 -m pip install Mopidy-Local \
  && python3 -m pip install Mopidy-MPD \
