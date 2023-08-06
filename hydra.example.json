@@ -6,14 +6,14 @@
 		"cookie_secret": "_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__"
 	},
 	"mopidy":{
-		"mpd_base_port": 6600,
 		"web_base_port": 6680,
 		"tcp_sink_base_port": 4953,
 		"instances": 2,
 		"config_path": "/tmp/",
 		"mpd":{
+			"mpd_base_port": 6600,
 			"mpd_password": "<password>"
-		}
+		},
 		"extensions":{
 			"spotify":{
 				"enabled": false,
