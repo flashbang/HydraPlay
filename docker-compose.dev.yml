@@ -23,7 +23,7 @@ services:
       dockerfile: docker/Dockerfile
       target: hydraplay
       args:
-        SNAPCASTVERSION: 0.26.0
+        SNAPCASTVERSION: 0.27.0
     container_name: hydraplay
     environment:
       PYTHONUNBUFFERED: 0
