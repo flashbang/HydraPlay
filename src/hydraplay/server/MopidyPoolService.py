@@ -52,12 +52,14 @@ class MopidyPoolService(threading.Thread):
         templateEnvironment = Environment(loader=templateLoader)
         template = templateEnvironment.get_template("mopidy.conf.j2")
         mpd_port = self.config['mopidy']['mpd_base_port'] + instance
+        mpd_password = self.config['mopidy']['mpd']['mpd_password']
         web_port = self.config['mopidy']['web_base_port'] + instance
         tcp_port = self.config['mopidy']['tcp_sink_base_port']
         source_type = self.config['hydraplay']['source_type']
         renedered_config = template.render(hydraplay_config=self.config,
                                            stream_id=instance,
                                            mpd_port=mpd_port,
+                                           mpd_password=mpd_password,
                                            web_port=web_port,
                                            tcp_port=tcp_port,
                                            source_type=source_type
