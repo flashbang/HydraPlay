@@ -14,6 +14,12 @@
 			"mpd_base_port": 6600,
 			"mpd_password": "<password>"
 		},
+		"mopiqtt":{
+			"mopiqtt_host": = 192.168.1.18,
+			"mopiqtt_port": = 1883,
+			"mopiqtt_username": = "<username>",
+			"mopiqtt_password": "<password>"
+		},
 		"extensions":{
 			"spotify":{
 				"enabled": false,
