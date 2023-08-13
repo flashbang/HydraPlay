@@ -60,11 +60,8 @@ class MopidyPoolService(threading.Thread):
         web_port = self.config['mopidy']['web_base_port'] + instance
         tcp_port = self.config['mopidy']['tcp_sink_base_port']
         source_type = self.config['hydraplay']['source_type']
-        instance_name_list = self.config['mopidy']['instance_name']
-        instance_name = instance_name_list[instance]
         renedered_config = template.render(hydraplay_config=self.config,
                                            stream_id=instance,
-                                           stream_name=instance_name,
                                            mpd_port=mpd_port,
                                            mpd_password=mpd_password,
                                            mopiqtt_host=mopiqtt_host,
