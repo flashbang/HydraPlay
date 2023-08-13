@@ -39,11 +39,11 @@ command_blacklist =
 default_playlist_scheme = m3u
 
 [mopiqtt]
-host = 192.168.1.18
-port = 1883
+host = {{ mopiqtt_host }}
+port = {{ mopiqtt_port }}
 topic = mopidy_{{ stream_id }}
-username = admin
-password = qZu1fIBvRBMxzRwvHfCr
+username = {{ mopiqtt_username }}
+password = {{ mopiqtt_password }}
 
 [http]
 enabled = true
