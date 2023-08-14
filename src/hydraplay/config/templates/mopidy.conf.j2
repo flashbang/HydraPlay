@@ -1,10 +1,10 @@
 [core]
-#cache_dir = /var/cache/mopidy
-#config_dir = /etc/mopidy
-#data_dir = /var/lib/mopidy
-cache_dir = ~/.cache/mopidy
-config_dir = ~/.config/mopidy
-data_dir = ~/.local/share/mopidy
+cache_dir = /var/cache/mopidy
+config_dir = /etc/mopidy
+data_dir = /var/lib/mopidy
+#cache_dir = ~/.cache/mopidy
+#config_dir = ~/.config/mopidy
+#data_dir = ~/.local/share/mopidy
 
 [logging]
 verbosity = 0
@@ -22,7 +22,7 @@ style = dark.css
 
 [m3u]
 enabled = true
-playlists_dir = ~/.local/share/mopidy/m3u/
+playlists_dir = /var/lib/mopidy/m3u/
 base_dir = $XDG_MUSIC_DIR
 default_encoding = latin-1
 default_extension = .m3u8
