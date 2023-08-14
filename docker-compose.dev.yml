@@ -41,5 +41,5 @@ services:
        - ./hydra.private.json:/tmp/hydra.config.json
        - ./pipes/:/tmp/additional_streams
        - ./mp3:/media
-       - ./m3u:~/.local/share/mopidy/m3u/
+       - ./m3u:/var/lib/mopidy/m3u/
     entrypoint: ["python3", "-u", "/test/hydraplay.sh", "--config", "/tmp/hydra.config.json", "--loglevel", "debug"]
