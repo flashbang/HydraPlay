@@ -99,13 +99,13 @@ RUN export SNAPCAST_ARCH=$TARGETARCH \
  && chmod a+x /app/hydraplay.sh \
  && chmod a+x /entrypoint.sh \
  && apt-get remove -y  \
-    wget \
-    git \
-    curl \
-    jq \
-    unzip \
-    gcc \
-    python3-pip \
+#    wget \
+#    git \
+#    curl \
+#    jq \
+#    unzip \
+#    gcc \
+#    python3-pip \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ~/.cache
 
 #======================================= General Docker configs ===================================================#
