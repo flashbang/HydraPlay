@@ -44,5 +44,5 @@ services:
        - ./cache_dir:/var/cache/mopidy
        - ./config_dir:/etc/mopidy
        - ./data_dir:/var/lib/mopidy
-       - ./mopidy_config:/root/.config/mopidy/mopidy.conf
+       - ./mopidy.conf:/root/.config/mopidy/mopidy.conf
     entrypoint: ["python3", "-u", "/test/hydraplay.sh", "--config", "/tmp/hydra.config.json", "--loglevel", "debug"]
